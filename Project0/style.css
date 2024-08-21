@@ -1,0 +1,38 @@
+#search{
+    padding-left: 75%;
+    
+}
+#img,#advanced{
+    padding-left: 90%;
+}
+a{  
+    border: 2px black solid;
+    text-decoration: none;
+    border-radius: 10px;
+    padding-inline: 5px;
+}
+form{
+    text-align: center;
+}
+form input{
+    border-radius: 10px;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+  }
+#logoandform{
+    margin: 11%;
+}
+input[type="submit"]{
+margin: 11px 4px;
+padding: 0 16px;
+}
+input[type="text"]{
+    width: 50%;
+}
+.left{
+text-align: left;
+}
