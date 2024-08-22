@@ -10,10 +10,10 @@
     <ul> 
         {% for entry in entries %}
         {%if not name  %}
-        <li><a href="wiki/{{entry}}">{{ entry }}</a></li>
+        <li><a href="../wiki/{{entry}}">{{ entry }}</a></li>
         {%else%}    
         {%if name in entry %}
-        <li><a href="wiki/{{entry}}">{{ entry }}</a></li>
+        <li><a href="../wiki/{{entry}}">{{ entry }}</a></li>
         {%else%}
           
         {%endif%}  
