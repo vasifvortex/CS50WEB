@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+
+   {% for listing in list_images %}
+   {%if listing.active %}
+   <div>
+   <div class="col-md-4">
+      {%if listing.picture%}
+         <a href="{% url 'listing' listing.id %}"><h1>{{ listing.name }}</h1></a>
+         <img src="{{ listing.picture.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+   </div>
+   {%else%}
+   <a href="{% url 'listing' listing.id %}"><h1>{{ listing.name }}</h1></a>
+   {%endif%}
+   <p>Description: {{ listing.description }}</p>
+   <p>Price: ${{ listing.price }}</p>
+   <p>Category: {{ listing.category }}</p>
+   <p>Created at {{ listing.created_at }}</p>
+   </div>
+   {%endif%}
+{% endfor %}
+
+{% endblock %}
+
+
+
+  
+

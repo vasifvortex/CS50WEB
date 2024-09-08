@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+
+{% if success %}
+    <h3>SUCCESSFULLY CREATED</h3>
+{% endif %}
+
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="width: 200px;">
+        <h2>New Listing</h2>   
+        {{ form.as_p }}
+        <button   type="submit">Submit</button>
+        </div>
+    </form>
+{% endblock %}
+
+    

@@ -1,0 +1,76 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+
+   <div style=" height: 45rem ; width: 45 rem">
+  
+      {%if listing.picture%}
+         <h1>Listing: {{ listing.name }}</h1>
+         <img src="{{ listing.picture.url }}" class="img-responsive" style="width:592px;height: 592px; float: left; margin-right: 10px;" />
+   {%else%}
+   <h1>Listing: {{ listing.name }}</h1>
+
+   {%endif%}
+   <p>Description: {{ listing.description }}</p>
+   <p>Price: ${{listing.price}}</p>
+   <p>Listed by: {{listing.user}}</p>
+   <p>Category: {{ listing.category }}</p>
+   <p>Created at {{ listing.created_at }}</p>
+   {%if listing.active %}
+   {% if user.is_authenticated %}
+    <h2>Place a Bid</h2>
+    <form action="{% url 'listing' listing.id %}" method="post">
+        {% csrf_token %}
+        {{ formb.as_p }}
+        <input class="btn btn-primary" type="submit" value="Submit Bid" style="margin-bottom: 16px;">
+    </form>
+    <strong style="color: red;">{{message}}</strong>
+    <h2>Add a Comment</h2>
+    <form action="{% url 'listing' listing.id %}" method="post">
+        {% csrf_token %}
+        {{ formc.as_p }}
+        <input class="btn btn-primary" type="submit" value="Submit Comment" style="margin-bottom: 16px;">
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+    {% endif %}  
+   
+   <form action="{% url 'add_watchlist' listing.id %}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" value="WatchList">
+    </form>
+  
+    {%if listing.user == user%}
+   
+    <form action="{% url 'close' listing.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Close" style="background-color: red ;border-color: red;margin-top: 16px;">
+    </form>
+    {%endif%} 
+    {%endif%}
+
+   {%if not listing.active and bids.last.user == user %}
+   <strong style="color: green;">You are winner!</strong>
+   {%endif%}
+
+  
+   
+   </div>
+
+<div>
+<!-- Display Comments -->
+<h2>Comments</h2>
+{% if comments %}
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.user.username }}</strong> - {{ comment.created_at|date:"M d, Y H:i" }}<br>
+                {{ comment.comment }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
+   </div>
+    
+{% endblock %}
